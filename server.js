@@ -44,6 +44,11 @@ function filterByQuery(query, animalsArray) {
   return filteredResults;
 }
  
+// takes id & array & return single object
+function findById(id, animalsArray) {
+  const result = animalsArray.filter(animal => animal.id === id)[0];
+  return result;
+}
 
  // get callback
 app.get('/api/animals', (req, res) => {
@@ -54,6 +59,21 @@ app.get('/api/animals', (req, res) => {
   res.json(results);
 });
 
+//  // Get with id
+// app.get('/api/animals/:id', (req, res) => {
+//   const result = findById(req.params.id, animals);
+//     res.json(result);
+// });
+
+// send error 404
+app.get('/api/animals/:id', (req, res) => {
+  const result = findById(req.params.id, animals);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
 
 // chain the listen() method onto server 
 app.listen(PORT, () => {
