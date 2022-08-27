@@ -3,18 +3,28 @@ const path = require('path');
 
 
 const { animals } = require('./data/animals');
-
 const express = require('express');
 
 
+
 // Declare app Variable
+
+
+const { animals } = require('./data/animals');
+
+
+
+
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+
+
 
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
@@ -60,6 +70,7 @@ function findById(id, animalsArray) {
   const result = animalsArray.filter(animal => animal.id === id)[0];
   return result;
 }
+
 
  // Callback
 app.get('/api/animals', (req, res) => {
@@ -114,6 +125,7 @@ app.post('/api/animals', (req, res) => {
 });
 
 
+
 // Add Validation
 function validateAnimal(animal) {
   if (!animal.name || typeof animal.name !== 'string') {
@@ -130,6 +142,12 @@ function validateAnimal(animal) {
   }
   return true;
 }
+
+
+// Route to serve indexhtml
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
 
 
