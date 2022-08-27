@@ -97,6 +97,13 @@ app.post('/api/animals', (req, res) => {
   res.json(req.body);
 });
 
+// Route to serve indexhtml
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+
+
 // chain the listen() method onto server 
 app.listen(PORT, () => {
     console.log(`API server now on port ${PORT}!`);
