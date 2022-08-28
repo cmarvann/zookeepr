@@ -22,6 +22,8 @@ const printResults = resultArr => {
   $displayArea.innerHTML = animalHTML.join('');
 };
 
+
+// Animal Function
 const getAnimals = (formData = {}) => {
   let queryUrl = '/api/animals?';
 
@@ -30,6 +32,20 @@ const getAnimals = (formData = {}) => {
   });
 
   console.log(queryUrl);
+
+  fetch(queryUrl)
+  .then(response => {
+    if (!response.ok) {
+      return alert('Error: ' + response.statusText);
+    }
+    return response.json();
+  })
+  .then(animalData => {
+    console.log(animalData);
+    printResults(animalData);
+  });
+
+
 
 };
 
