@@ -10,13 +10,9 @@ const express = require('express');
 // Declare app Variable
 
 
-const { animals } = require('./data/animals');
-
-
-
-
 const PORT = process.env.PORT || 3001;
 const app = express();
+
 
 
 // parse incoming string or array data
@@ -24,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 
+app.use(express.static('public'));
 
 
 function filterByQuery(query, animalsArray) {
@@ -91,7 +88,7 @@ app.get('/api/animals/:id', (req, res) => {
   }
 });
 
-// Animal Creation
+// Animal Creation, serves index.html
 function createNewAnimal(body, animalsArray) {
   // console.log(body);
   // our function's main code will go here!
@@ -106,6 +103,23 @@ function createNewAnimal(body, animalsArray) {
   return animal;
   // return body;
 }
+  // Animals Route
+app.get('/animals', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+
+  // Zookeepers Route
+app.get('/zookeepers', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+
+
+ // Wildcard Route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
 
 // post route call back function
 app.post('/api/animals', (req, res) => {
