@@ -5,6 +5,7 @@ const {
   createNewZookeeper,
   validateZookeeper
 } = require('../../lib/zookeepers');
+
 const { zookeepers } = require('../../data/zookeepers');
 
 router.get('/zookeepers', (req, res) => {
