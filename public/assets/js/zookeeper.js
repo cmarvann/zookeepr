@@ -48,7 +48,6 @@ const getZookeepers = (formData) => {
 };
 
 
-
 const handleGetZookeepersSubmit = event => {
   event.preventDefault();
   const nameHTML = $zookeeperForm.querySelector('[name="name"]');
